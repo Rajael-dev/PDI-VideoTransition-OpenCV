@@ -15,7 +15,8 @@ vel = 0.05
 #height = cap.get(4)  # float `height`
 
 #print('width, height:', width, height)
-
+i = 1
+vel = 0.01
 # Read until video is completed
 while(cap.isOpened()):
   # Capture frame-by-frame
@@ -25,8 +26,8 @@ while(cap.isOpened()):
 
   if ret == True:
     # Display the resulting frame
-    for i in reversed(np.arange(0.0, 1.1, vel)):
-          #quarter_height = height/2
+
+      #quarter_height = height/2
       quarter_width = width-i*width
       T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
   
@@ -37,13 +38,7 @@ while(cap.isOpened()):
       cv2.imshow('Translation', img_translation)
       cv2.waitKey(100)  
     
-    # Press Q on keyboard to  exit
-    if cv2.waitKey(25) & 0xFF == ord('x'):
-      break
-
-  # Break the loop
-  else: 
-    break
+      i = i - vel
 
 # When everything done, release the video capture object
 cap.release()
