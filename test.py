@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
   
-image = cv2.imread('starry_night.jpg')
+image = cv2.imread('videos\starry_night.jpg')
   
 # Store height and width of the image
 height, width = image.shape[:2]
