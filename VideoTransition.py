@@ -26,19 +26,25 @@ while(cap.isOpened()):
 
   if ret == True:
     # Display the resulting frame
-
-      #quarter_height = height/2
-      quarter_width = width-i*width
-      T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
+    #quarter_height = height/2
+    quarter_width = width-i*width
+    T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
   
-      # We use warpAffine to transform
-      # the image using the matrix, T
-      img_translation = cv2.warpAffine(frame, T, (width, height))
+    # We use warpAffine to transform
+    # the image using the matrix, T
+    img_translation = cv2.warpAffine(frame, T, (width, height))
   
-      cv2.imshow('Translation', img_translation)
-      cv2.waitKey(100)  
+    cv2.imshow('Translation', img_translation)
+    cv2.waitKey(25)  
     
-      i = i - vel
+    i = i - vel
+    if cv2.waitKey(25) & 0xFF == ord('q'):
+          break
+
+  # Break the loop
+  else: 
+    break
+
 
 # When everything done, release the video capture object
 cap.release()
