@@ -5,12 +5,14 @@ image = cv2.imread('starry_night.jpg')
   
 # Store height and width of the image
 height, width = image.shape[:2]
+print(width, height)
 
 cv2.imshow("Originalimage", image)
 
-for i in reversed(np.arange(0.0, 1.1, 0.1)):
-    print(i)
+#Velocidade da transição
+vel = 0.05
 
+for i in reversed(np.arange(0.0, 1.1, vel)):
 #quarter_height = height/2
 
 

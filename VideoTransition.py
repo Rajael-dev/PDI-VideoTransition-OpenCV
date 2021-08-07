@@ -9,17 +9,34 @@ cap = cv2.VideoCapture('Sand.mp4')
 if (cap.isOpened() == False): 
   print("Error opening video stream or file")
 
+#height, width = cap.shape[:2]
+vel = 0.05
+#width  = cap.get(3)  # float `width`
+#height = cap.get(4)  # float `height`
+
+#print('width, height:', width, height)
+
 # Read until video is completed
 while(cap.isOpened()):
   # Capture frame-by-frame
   ret, frame = cap.read()
-
-  
+  frame = cv2.resize(frame, (540, 380), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
+  height, width = frame.shape[:2]
 
   if ret == True:
     # Display the resulting frame
-    cv2.imshow('Frame',frame)
-
+    for i in reversed(np.arange(0.0, 1.1, vel)):
+          #quarter_height = height/2
+      quarter_width = width-i*width
+      T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
+  
+      # We use warpAffine to transform
+      # the image using the matrix, T
+      img_translation = cv2.warpAffine(frame, T, (width, height))
+  
+      cv2.imshow('Translation', img_translation)
+      cv2.waitKey(100)  
+    
     # Press Q on keyboard to  exit
     if cv2.waitKey(25) & 0xFF == ord('x'):
       break
