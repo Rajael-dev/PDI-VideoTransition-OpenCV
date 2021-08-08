@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 # Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
@@ -11,7 +12,7 @@ if (cap1.isOpened() == False):
   print("Error opening video stream or file")
 
 i = 2
-vel = 0.02
+vel = 0.015
 
 # Read until video is completed
 while(cap2.isOpened()):
@@ -33,17 +34,17 @@ while(cap2.isOpened()):
     # the image using the matrix, T
     mashup = np.concatenate((frame2, frame1), axis=1)
 
-    img_translation = cv2.warpAffine(mashup, T, (width, height))
+    frame_translation = cv2.warpAffine(mashup, T, (width, height))
 
-    cv2.imshow('Translation', img_translation)
+    cv2.imshow('Slide Left to Right', frame_translation)
     cv2.waitKey(10)  
 
     i = i - vel
-    print(i)
 
     if i <= 1:
       i=1
       vel = 0
+
     if cv2.waitKey(10) & 0xFF == ord('q'):
           break
 
