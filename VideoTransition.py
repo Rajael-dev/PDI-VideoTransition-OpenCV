@@ -3,8 +3,8 @@ import numpy as np
 
 # Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
-cap1 = cv2.VideoCapture('videos/Sand.mp4')
-cap2 = cv2.VideoCapture('videos/Bees.mp4')
+cap1 = cv2.VideoCapture('videos/Bees.mp4')
+cap2 = cv2.VideoCapture('videos/Sand.mp4')
 
 # Check if camera opened successfully
 if (cap1.isOpened() == False): 
@@ -26,18 +26,22 @@ while(cap1.isOpened()):
   if ret == True:
     # Display the resulting frame
     #quarter_height = height/2
-    quarter_width = width-i*width
-    T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
+    width_variation = width-i*width
+    T = np.float32([[1, 0, width_variation], [0, 1, 0]])
   
     # We use warpAffine to transform
     # the image using the matrix, T
     mashup = np.concatenate((frame2, frame1), axis=1)
 
     img_translation = cv2.warpAffine(mashup, T, (width, height))
+
     cv2.imshow('Translation', img_translation)
     cv2.waitKey(25)  
 
     i = i - vel
+
+    if i <= 1:
+      vel = 0
 
     if cv2.waitKey(25) & 0xFF == ord('q'):
           break
