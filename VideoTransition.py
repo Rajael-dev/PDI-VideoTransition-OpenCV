@@ -14,12 +14,12 @@ i = 2
 vel = 0.02
 
 # Read until video is completed
-while(cap1.isOpened()):
+while(cap2.isOpened()):
   # Capture frame-by-frame
   ret, frame1 = cap1.read()
-  frame1 = cv2.resize(frame1, (540, 380), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
+  frame1 = cv2.resize(frame1, (720, 480), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
   ret, frame2 = cap2.read()
-  frame2 = cv2.resize(frame2, (540, 380), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
+  frame2 = cv2.resize(frame2, (720, 480), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
 
   height, width = frame1.shape[:2]
 
@@ -36,14 +36,15 @@ while(cap1.isOpened()):
     img_translation = cv2.warpAffine(mashup, T, (width, height))
 
     cv2.imshow('Translation', img_translation)
-    cv2.waitKey(25)  
+    cv2.waitKey(10)  
 
     i = i - vel
+    print(i)
 
     if i <= 1:
+      i=1
       vel = 0
-
-    if cv2.waitKey(25) & 0xFF == ord('q'):
+    if cv2.waitKey(10) & 0xFF == ord('q'):
           break
 
   # Break the loop
@@ -52,6 +53,6 @@ while(cap1.isOpened()):
 
 # When everything done, release the video capture object
 cap1.release()
-
+cap2.release()
 # Closes all the frames
 cv2.destroyAllWindows()
