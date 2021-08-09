@@ -1,32 +1,15 @@
 import cv2
-import numpy as np
-  
-image = cv2.imread('videos\starry_night.jpg')
-  
-# Store height and width of the image
-height, width = image.shape[:2]
-print(width, height)
 
-cv2.imshow("Originalimage", image)
+cap = cv2.VideoCapture("videos/Bees.mp4")
+fps = cap.get(cv2.CAP_PROP_FPS)      # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
+frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+duration = frame_count/fps
 
-#Velocidade da transição
-vel = 0.05
+print('fps = ' + str(fps))
+print('number of frames = ' + str(frame_count))
+print('duration (S) = ' + str(duration))
+minutes = int(duration/60)
+seconds = duration%60
+print('duration (M:S) = ' + str(minutes) + ':' + str(seconds))
 
-for i in reversed(np.arange(0.0, 1.1, vel)):
-#quarter_height = height/2
-
-
-    quarter_width = width-i*width
-
-
-    T = np.float32([[1, 0, quarter_width], [0, 1, 0]])
-  
-# We use warpAffine to transform
-# the image using the matrix, T
-    img_translation = cv2.warpAffine(image, T, (width, height))
-  
-
-    cv2.imshow('Translation', img_translation)
-
-    cv2.waitKey(100)  
-cv2.destroyAllWindows()
+cap.release()
