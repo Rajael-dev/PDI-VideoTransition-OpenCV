@@ -35,10 +35,10 @@ print('Deve ser um valor entre 3 (min) e 30 (máx): ')
 vel = input()
 vel = float(vel)
 
-if vel > 30 or vel < 3:
-    print('Valor para velocidade inválido!')
-    print()
-    exit()
+# if vel > 30 or vel < 3:
+#     print('Valor para velocidade inválido!')
+#     print()
+#     exit()
 
 transition_point = round(357/vel)+1
 
@@ -74,10 +74,10 @@ while(cap2.isOpened()):
                 height, width = frame2.shape[:2]
 
                 if j <= width/2:
-                    croppedImage1 = frame1[0:height, int(width/2):int(width-j)]
-                    croppedImage2 = frame1[0:height, int(0+j):int(width/2)]
+                    croppedImage1 = frame1[int(height/2):int(height-j), 0:width]
+                    croppedImage2 = frame1[int(0+j):int(height/2), 0:width]
 
-                    frame2[0:0+croppedImage1.shape[0], int(j+width/2):int(j+width)] = croppedImage1
+                    frame2[int(j+height/2):int(j+height), 0:0+croppedImage1.shape[1]] = croppedImage1
                     frame2[0:0+croppedImage2.shape[0], 0:0+croppedImage2.shape[1]] = croppedImage2
 
                     j = j + vel
