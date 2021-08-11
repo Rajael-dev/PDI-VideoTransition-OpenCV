@@ -35,10 +35,10 @@ print('Deve ser um valor entre 3 (min) e 30 (máx): ')
 vel = input()
 vel = float(vel)
 
-# if vel > 30 or vel < 3:
-#     print('Valor para velocidade inválido!')
-#     print()
-#     exit()
+if vel > 30 or vel < 3:
+    print('Valor para velocidade inválido!')
+    print()
+    exit()
 
 transition_point = round(357/vel)+1
 
