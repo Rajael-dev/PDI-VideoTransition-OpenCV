@@ -26,12 +26,10 @@ if (cap1.isOpened() == False or cap2.isOpened() == False):
 current_frame1 = 0
 current_frame2 = 0
 
-# Valor inicial da posição dos vídeos na janela
 i = 2
 
 # Velocidade do efeito de transição
-# Quanto mais próximo de 1 mais rápido e quanto mais próximo de 0 mais lento
-# A velocidade deve ser entre: 0.1 (muito rápido) e 0.01 (muito lento)
+# A velocidade deve ser entre: 0.1 (mais rápido) e 0.01 (mais lento)
 # Valor recomendado: 0.02
 print()
 print('Escolha a velocidade')
@@ -46,10 +44,6 @@ if vel > 0.1 or vel < 0.01:
 
 transition_point = (round(duration1)/vel)/round(duration1)
 transition_point = round(transition_point)
-
-#smoothing_point = [600,300]
-#edge_point = [752, 300]
-#H = 1/(1+(((752-600)**2)+((300-300)**2))/)
 
 while(cap2.isOpened()):
     ret1, frame1 = cap1.read()

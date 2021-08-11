@@ -26,12 +26,8 @@ if (cap1.isOpened() == False or cap2.isOpened() == False):
 current_frame1 = 0
 current_frame2 = 0
 
-# Valor inicial da posição dos vídeos na janela
-i = 2
-
 # Velocidade do efeito de transição
-# Quanto mais próximo de 1 mais rápido e quanto mais próximo de 0 mais lento
-# A velocidade deve ser entre: 30 (muito rápido) e 3 (muito lento)
+# A velocidade deve ser entre: 30 (mais rápido) e 3 (mais lento)
 # Valor recomendado: 10
 print()
 print('Escolha a velocidade')
@@ -55,7 +51,7 @@ while(cap2.isOpened()):
         if current_frame1 <= frame_count1-transition_point:
             frame1 = cv2.resize(frame1, (720, 480), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
 
-            cv2.imshow("Slide Left to Right", frame1)
+            cv2.imshow("Horizontal Split", frame1)
             cv2.waitKey(10)
 
             final_frame = frame1
@@ -64,11 +60,11 @@ while(cap2.isOpened()):
         else:
             if ret1 == True:
                 frame1 = cv2.resize(frame1, (720, 480), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
-                cv2.imshow("Slide Left to Right", frame1)
+                cv2.imshow("Horizontal Split", frame1)
 
             else:
                 frame1 = cv2.resize(final_frame, (720, 480), fx = 0, fy = 0, interpolation = cv2.INTER_CUBIC)
-                cv2.imshow("Slide Left to Right", final_frame)
+                cv2.imshow("Horizontal Split", final_frame)
             
             ret2, frame2 = cap2.read()
 
@@ -86,7 +82,7 @@ while(cap2.isOpened()):
 
                     j = j + vel
 
-                cv2.imshow("Slide Left to Right", frame2)
+                cv2.imshow("Horizontal Split", frame2)
                 cv2.waitKey(10)
 
                 current_frame2 = current_frame2 + 1
